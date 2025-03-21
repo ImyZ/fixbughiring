@@ -7,19 +7,16 @@ import {Observable} from "rxjs";
 })
 export class ListService {
 
+  private apiUrl = 'http://localhost/api/getlist';
+  private newRouteUrl = 'http://localhost/api/newroute';
+
   constructor(private http: HttpClient) { }
 
-  async getList(): Promise<any> {
-    try {
-      let response = await fetch('http://localhost/app_dev.php/api/getlist');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      throw error; // You can choose to handle the error here or propagate it to the caller.
-    }
+  getList(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
+  getNewRouteMessage(): Observable<any> {
+    return this.http.get<any>(this.newRouteUrl);
+  }
 }

@@ -1,0 +1,19 @@
+<div class="container d-flex flex-column align-items-center justify-content-center vh-100">
+  <div class="text-center">
+    <h2>Liste des Articles</h2>
+    <p>Voici la liste des articles disponibles chez nous, bienvenues!</p>
+    <!-- Show loading message while data is still being fetched -->
+    <p *ngIf="loading" class="text-info">Loading articles, please wait...</p>
+    <!-- Show the list of articles once data is loaded -->
+    <ul class="list-group mt-4" *ngIf="!loading">
+      <li class="list-group-item" *ngFor="let article of articles">
+        {{ article.nom }} - {{ article.marque }} - {{ article.prix }}€ - {{ article.stock }} unité(s)
+      </li>
+    </ul>
+    <!-- Display the message from /api/newroute -->
+    <p *ngIf="message" class="text-success mt-4">{{ message }}</p>
+  </div>
+  <div class="w-100 d-flex justify-content-end mt-4">
+    <button routerLink="/questions" class="btn btn-secondary">Retour</button>
+  </div>
+</div>
